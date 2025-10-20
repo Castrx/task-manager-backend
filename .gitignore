@@ -1,0 +1,23 @@
+```gitignore
+# Compilação e builds
+/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# IDEs e editores
+/.idea/
+/.vscode/
+*.iml
+
+# Logs
+*.log
+
+# Configurações locais
+application.properties
+application.yml
+
+# Sistema
+.DS_Store
+Thumbs.db

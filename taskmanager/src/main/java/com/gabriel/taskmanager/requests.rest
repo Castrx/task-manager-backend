@@ -1,0 +1,52 @@
+@baseUrl = http://localhost:8080
+@contentType = application/json
+
+### ✅ Registrar novo usuário
+POST {{baseUrl}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+  "username": "gabriel",
+  "email": "gabriel@email.com",
+  "password": "123456"
+}
+
+### 🔑 Fazer login (gera token JWT)
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+  "username": "gabriel",
+  "password": "123456"
+}
+
+### 📋 Listar tarefas (usa token automaticamente)
+GET {{baseUrl}}/api/tasks
+Authorization: Bearer {{login.response.body.token}}
+
+### ➕ Criar nova tarefa
+POST {{baseUrl}}/api/tasks
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Aprender Spring Boot",
+  "description": "Estudar autenticação com JWT",
+  "completed": false
+}
+
+### ✏️ Atualizar tarefa (exemplo ID = 1)
+PUT {{baseUrl}}/api/tasks/1
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Aprender Spring Boot (Atualizado)",
+  "description": "JWT funcionando perfeitamente",
+  "completed": true
+}
+
+### ❌ Deletar tarefa (exemplo ID = 1)
+DELETE {{baseUrl}}/api/tasks/1
+Authorization: Bearer {{login.response.body.token}}
